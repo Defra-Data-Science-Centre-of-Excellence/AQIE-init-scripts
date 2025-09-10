@@ -1,6 +1,7 @@
 # init-scripts
 Short shell scripts for initialising data science Linux environments.
 
+In particular the R installs have been amended to suit the needs of users in the air quality team. Added packages include openair, afcharts and more.
 
 ## Environments
 <table>
