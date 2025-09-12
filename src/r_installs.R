@@ -25,3 +25,9 @@ install.packages(c(
   # Parallel / future
   "future", "furrr", "parallelly", "processx"
 ), repos = "https://cloud.r-project.org")
+
+# install rgovspeak
+devtools::install_github('Defra-Data-Science-Centre-of-Excellence/rgovspeak')
+
+# install rapid.spreadsheets
+devtools::install_github('RAPID-ONS/rapid.spreadsheets')
