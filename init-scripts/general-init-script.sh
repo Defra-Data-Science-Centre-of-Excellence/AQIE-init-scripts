@@ -15,4 +15,4 @@ wget $URL/base_libs.sh -O- | bash  -ex
 sudo apt-get install -y librsvg2-dev pandoc
 
 # Install R packages
-Rscript https://raw.githubusercontent.com/Defra-Data-Science-Centre-of-Excellence/AQIE-init-scripts/main/init-scripts/r_installs.R
+Rscript /Volumes/prd_dash_lab/aqienn_restricted/evidence/config/r_installs.R
