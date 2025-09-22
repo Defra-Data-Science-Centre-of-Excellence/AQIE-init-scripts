@@ -1,98 +1,10 @@
-# init-scripts
-Short shell scripts for initialising data science Linux environments.
+# AQIE Init Script
 
-In particular the R installs have been amended to suit the needs of users in the air quality team. Added packages include openair, afcharts and packages for Shiny dashboards.
+Project to manage and maintain the farming stats cluster on Databricks. Currently it houses:
 
-## Environments
-<table>
-  <thead><tr>
-    <th>Environment</th>
-    <th>Install Guide</th>
-    <th></th>
-    <th>Description</th>
-  </tr></thead>
-  <tbody><tr>
-    <td><a href="DASH.sh">DASH</a></td>
-    <td>add repo, add init script, add environmental variables</td>
-    <td>init script: <code>/Repos/USER/init-scripts/DASH.sh</code></td>
-    <th>DASH initialisation global script for databricks clusters. †</th>
-  </tr><tr>
-    <td><a href="src/dbfs_clean.py">DBFS Clean</a></td>
-    <td>schedule for weekends</td>
-    <td></td>
-    <th>A schedulable job to remove user created files not in lab area.</th>
-  </tr><tr>
-    <td>rootcert</td>
-    <td>add manually</td>
-    <td></td>
-    <th>Root Certification to solve SSH issue requires secret and such not stored on GitHub.</th>
-  </tr><tr>
-    <td><a href="SCE.sh">SCE</a></td>
-    <td>run in terminal</td>
-    <td><code>wget -O- https://raw.githubusercontent.com/Defra-Data-Science-Centre-of-Excellence/init-scripts/main/SCE.sh | bash</code></td>
-    <th>SCE initialisation script for SCE virtual Linux machine.</th>
-  </tr><tr>
-    <td><a href="src/swapfile.sh">SwapFile</a></td>
-    <td>run in terminal</td>
-    <td><code>wget -O- https://raw.githubusercontent.com/Defra-Data-Science-Centre-of-Excellence/init-scripts/main/src/swapfile.sh | bash</code></td>
-    <th>For small SCE machines, reduce Out-of-Memory errors with extra swap storage.</th>
-  </tr></tbody>
-</table>
+- The AQIE general init script. This is the init script used to configure the shared AQIE Rstudio cluster. The core of this init script, is based off of the DASH general purpose init script and the farming stats' init script. In particular the R installs have been amended to suit the needs of users in the air quality team. Added packages include openair, afcharts and packages for Shiny dashboards. This init script should work for all cluster sizes (including personal and large single nodes), and therefore can be easily used by any team members.
+- The notebook coding start up and shut down for the shared AQIE RStudio cluster. This notebook is parameterised to run in two ways, turn on the cluster or turn off. The execution of the notebook is managed by two databricks jobs, which execute on a set schedule. The job to turn the cluster on is triggered every Monday at 06:00. The job to run the cluster off is triggered every Friday at 20:00. This ensures the cluster is up for the Defra core hours.
+- The notebook to clean up logging files from the AQIE RStudio cluster. This is a notebook that deletes all logs that are 28 days or older. This just helps manage the log directories, ensuring they don't become too large.
+- The notebook to view the logs from the AQIE cluster. This is a notebook that allows the user to ID and examine cluster logs. This is essential for troubleshooting instances where the cluster hasn't initialised as expected.
 
-> † [Sedona requires extra spark config](https://sedona.apache.org/latest-snapshot/setup/databricks/)  
-
-
-<details>
-  <summary><h3>Libraries: in depth</h3></summary>
-
-| Script | Lang | Library | Group |
-| ------ | ---- | ------- | ----- |
-| Runtime 12 | [Databricks Runtime](https://docs.databricks.com/release-notes/runtime/releases.html)
-| Runtime 12 | [R]([https://docs.databricks.com/release-notes/runtime/12.2#--installed-r-libraries) |
-| Runtime 12 | [py](https://docs.databricks.com//release-notes/runtime/12.2#installed-python-libraries) |
-| Base | ppa | ppa:c2d4u.team/c2d4u4.0+ | R-Cran binary install |
-| Base | ppa | ppa:ubuntugis/ppa | Geospatial |
-| Base | bin | parallel | GNU |
-| Base | R | renv | RStudio Connect |
-| Base | R | devtools | RStudio Connect |
-| Base | R | rstudioapi | RStudio Connect |
-| Base | R | packrat | RStudio Connect |
-| Base | R | rsconnect | RStudio Connect |
-| Base | R | dt | Shiny |
-| Base | R | shinyjs | Shiny |
-| Base | R | shinydashboard | Shiny |
-| Base | R | shinycssloaders | Shiny |
-| Base | R | sf | Geospatial |
-| Base | R | raster | Geospatial |
-| Base | R | leaflet | Geospatial |
-| Base | R | arrow |
-| Base | R | plotly |
-| Base | R | biocmanager | Farm Stats | 
-| Base | R | bs4dash | Farm Stats |
-| Base | R | janitor | Farm Stats |
-| Base | R | odbc | Farm Stats |
-| Base | R | rgdal | Farm Stats |
-| Base | R | rpostgres | Farm Stats |
-| Base | R | srvyr | Farm Stats |
-| Base | R | zoo | Farm Stats |
-| Base | py | pandas |
-| Base | py | matplotlib |
-| Base | py | openpyxl |
-| Base | bin | libgdal-dev | Geospatial |
-| Base | bin | libgeos-dev | Geospatial |
-| Base | bin | libproj-dev | Geospatial |
-| Base | bin | libspatialindex-dev | Geospatial |
-| Base | bin | libsqlite3-mod-spatialite | Geospatial |
-| Base | py | spatialite | Geospatial |
-| Base | py | rtree | Geospatial |
-| Base | py | pyproj | Geospatial |
-| Base | py | pyogrio | Geospatial |
-| Base | py | geopandas | Geospatial |
-| Base | py | geocube | Geospatial |
-| Geo | jar | geotools-wrapper | Sedona |
-| Geo | jar | sedona-python-adapter | Sedona |
-| Geo | jar | sedona-viz | Sedona |
-| Geo | py | apache-sedona | Sedona |
-| Geo | py | databricks-mosaic | Mosaic |
-
-</details>
+For more information on our shared cluster see the [Air Quality Wiki](https://dap-prd2-connect.azure.defra.cloud/Air-Quality-Wiki/guidance/dash-guidance.html).
