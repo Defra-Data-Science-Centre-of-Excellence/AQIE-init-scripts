@@ -11,7 +11,8 @@ install.packages(c(
   "Rcpp", "BH", "arrow", "brms", "cli", "cowplot", "dplyr", "tidyr",
   "tibble", "readr", "readxl", "writexl", "janitor", "lubridate",
   "stringr", "forcats", "purrr", "tidyselect", "tidyverse", "rlang",
-  "glue", "magrittr", "pillar", "pkgconfig", "withr", "packrat", "rsconnect",
+  "glue", "magrittr", "pillar", "pkgconfig", "withr", "packrat", "rsconnect", 
+  "sparklyr", "pysparklyr",
   
   # Visualization
   "afcharts", "aftables", "openair", "ggplot2", "ggrepel", "ggforce", "ggridges",
